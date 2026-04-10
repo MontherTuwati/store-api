@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Monther Store</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main>
+      <h1>Monther Store</h1>
+      <p class="subtitle">Products from your API (demo / student work).</p>
+
+      <div class="tabs" role="tablist" aria-label="Data source">
+        <button type="button" role="tab" id="tab-local" aria-selected="true" aria-controls="panel-local">
+          My store (getAll)
+        </button>
+        <button type="button" role="tab" id="tab-all" aria-selected="false" aria-controls="panel-all">
+          All stores
+        </button>
+      </div>
+
+      <section
+        id="panel-local"
+        class="panel"
+        role="tabpanel"
+        aria-labelledby="tab-local"
+      >
+        <p class="status" id="status-local">Loading…</p>
+        <div id="table-local"></div>
+      </section>
+
+      <section
+        id="panel-all"
+        class="panel"
+        role="tabpanel"
+        aria-labelledby="tab-all"
+        hidden
+      >
+        <p class="status" id="status-all">Loading…</p>
+        <div id="table-all"></div>
+      </section>
+    </main>
+
+    <footer>
+      Student work for demonstrating web development skills only — not a real store.
+    </footer>
+
+    <script src="/app.js"></script>
+  </body>
+</html>
