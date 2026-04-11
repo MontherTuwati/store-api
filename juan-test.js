@@ -5,7 +5,7 @@ const https = require("https");
 const { URL } = require("url");
 
 const TEST_NAME = "getAll to show all product";
-const email = process.env.JUAN_STUDENT_EMAIL || process.env.STUDENT_EMAIL || "juan@example.com";
+const email = process.env.JUAN_STUDENT_EMAIL || "vasq0049@algonquinlive.com";
 const target =
   process.env.JUAN_API_URL || "https://juan-store-api.onrender.com/products";
 

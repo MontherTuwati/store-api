@@ -7,7 +7,7 @@ const { URL } = require("url");
 
 const TEST_NAME = "getAll to show all product";
 const email =
-  process.env.MAYA_STUDENT_EMAIL || process.env.STUDENT_EMAIL || "mayada@example.com";
+  process.env.MAYA_STUDENT_EMAIL || "saou0003@algonquinlive.com";
 const target =
   process.env.MAYA_API_URL || "https://mayada-store-api-2.onrender.com/products";
 
