@@ -1,7 +1,4 @@
-/**
- * Prints one line per test: email - testName - HTTP status - PASSED|FAILED
- * (Assignment format; HTTP code is 200 when passed, else last recorded status from test.)
- */
+//Prints one line per test: email testName status PASSED/FAILED
 
 class AssignmentReporter {
   onRunComplete(_contexts, results) {

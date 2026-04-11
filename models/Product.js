@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-// Assignment fields: storeId, storeName, productId, productName, price
+// Product schema fields: storeId, storeName, productId, productName, price
 const productSchema = new mongoose.Schema({
   storeId: { type: String, required: true },
   storeName: { type: String, required: true },

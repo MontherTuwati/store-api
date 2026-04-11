@@ -1,10 +1,10 @@
 /**
- * Inserts 5+ sample products for this store (run after .env has MONGODB_URI).
- * Usage: npm run seed
+ * Inserts 5 sample products for the store.
+ * Use npm run seed to run this script.
  */
 require("dotenv").config({ path: require("path").join(__dirname, "..", ".env") });
 const mongoose = require("mongoose");
-const Product = require("../models/product");
+const Product = require("../models/Product");
 
 const samples = [
   {

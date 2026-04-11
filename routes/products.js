@@ -1,5 +1,5 @@
 const express = require("express");
-const Product = require("../models/product");
+const Product = require("../models/Product");
 const { loadRemoteStores, normalizeDoc } = require("../services/remoteProducts");
 
 const router = express.Router();
@@ -27,13 +27,12 @@ router.post("/", async (req, res) => {
   }
 });
 
-// Get all — this store only (MongoDB)
+// Get all products for this store only
 router.get("/", getAllLocal);
 
-// REQUIRED getAll (assignment); full path: GET /products/getAll
+// getAll endpoint full path: GET /products/getAll
 router.get("/getAll", getAllLocal);
 
-// Aggregated GetAll: local DB + Juan JSON + Maya JSON
 router.get("/all-stores", async (req, res) => {
   try {
     const local = await Product.find().sort({ productId: 1 }).lean();
@@ -51,7 +50,7 @@ router.get("/all-stores", async (req, res) => {
   }
 });
 
-// Get one by Mongo _id
+// Get one product by Mongo id
 router.get("/id/:id", async (req, res) => {
   try {
     const doc = await Product.findById(req.params.id);
@@ -62,7 +61,7 @@ router.get("/id/:id", async (req, res) => {
   }
 });
 
-// Get one by business key productId (within optional storeId query)
+// Get one product by business key productId
 router.get("/by-product-id/:productId", async (req, res) => {
   try {
     const q = { productId: req.params.productId };
