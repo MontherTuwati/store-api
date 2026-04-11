@@ -13,8 +13,8 @@ if (!uri) {
 mongoose
   .connect(uri)
   .then(() => {
-    app.listen(PORT, () => {
-      console.log(`Listening on http://localhost:${PORT}`);
+    app.listen(PORT, "0.0.0.0", () => {
+      console.log(`Listening on port ${PORT}`);
     });
   })
   .catch((err) => {
