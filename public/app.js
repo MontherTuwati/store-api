@@ -66,7 +66,7 @@
       if (!res.ok) throw new Error("HTTP " + res.status);
       const data = await res.json();
       if (!Array.isArray(data)) throw new Error("Expected a JSON array");
-      setStatus(statusLocal, data.length + " product(s) from your database.", false);
+      setStatus(statusLocal, data.length + " product(s) from database.", false);
       renderTable(tableLocal, data, false);
     } catch (e) {
       setStatus(statusLocal, "Could not load /getAll: " + e.message, true);
