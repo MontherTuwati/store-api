@@ -1,18 +1,6 @@
 require("dotenv").config();
-const express = require("express");
 const mongoose = require("mongoose");
-const productsRouter = require("./routes/products");
-
-const app = express();
-app.use(express.json());
-
-// Assignment path GET /getAll (same data as GET /products)
-app.get("/getAll", productsRouter.getAllLocal);
-
-app.use("/products", productsRouter);
-
-// Frontend (HTML / CSS / JS) — same origin as API, no CORS needed
-app.use(express.static("public"));
+const app = require("./app");
 
 const PORT = process.env.PORT || 3000;
 const uri = process.env.MONGODB_URI;
