@@ -3,7 +3,20 @@ const mongoose = require("mongoose");
 const app = require("./app");
 
 const PORT = process.env.PORT || 3000;
-const uri = process.env.MONGODB_URI;
+
+/** Trim whitespace and strip wrapping quotes (common when pasting into host env UIs). */
+function normalizeMongoUri(raw) {
+  let s = String(raw ?? "").trim();
+  if (
+    (s.startsWith('"') && s.endsWith('"')) ||
+    (s.startsWith("'") && s.endsWith("'"))
+  ) {
+    s = s.slice(1, -1).trim();
+  }
+  return s;
+}
+
+const uri = normalizeMongoUri(process.env.MONGODB_URI);
 
 if (!uri) {
   console.error("MONGODB_URI is not set.");
@@ -28,7 +41,11 @@ if (mongoHost === "cluster.mongodb.net") {
 console.log("MongoDB host:", mongoHost);
 
 mongoose
-  .connect(uri, { serverSelectionTimeoutMS: 30000 })
+  .connect(uri, {
+    serverSelectionTimeoutMS: 30000,
+    // Prefer IPv4; some platforms resolve SRV to IPv6 routes that fail from the host network.
+    family: 4,
+  })
   .then(() => {
     app.listen(PORT, "0.0.0.0", () => {
       console.log(`Listening on port ${PORT}`);
