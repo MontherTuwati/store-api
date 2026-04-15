@@ -1,8 +1,4 @@
-/**
- * Fetches JSON product arrays from teammate deployed APIs.
- * Juan: GET /products
- * Maya: GET /products (JSON; /products-view is HTML for browsers)
- */
+//Fetches product arrays from team member APIs.
 
 function remoteTimeoutMs() {
   const n = Number(process.env.REMOTE_FETCH_TIMEOUT_MS);
