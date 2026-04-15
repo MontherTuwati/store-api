@@ -1,13 +1,14 @@
-//Runs standalone Node test scripts in order.
-
 const { spawn } = require("child_process");
 const fs = require("fs");
 const path = require("path");
 
+const ROOT = path.join(__dirname, "..");
+const STANDALONE_DIR = path.join(ROOT, "tests", "standalone");
+
 const TEST_FILES = ["test-getAll.js", "juan-test.js", "mayada-test.js"];
 
 function envFromDotEnv() {
-  const fp = path.join(__dirname, ".env");
+  const fp = path.join(ROOT, ".env");
   if (!fs.existsSync(fp)) return {};
   const out = {};
   const text = fs.readFileSync(fp, "utf8");
@@ -30,7 +31,7 @@ function envFromDotEnv() {
 }
 
 function runScript(filename) {
-  const fullPath = path.join(__dirname, filename);
+  const fullPath = path.join(STANDALONE_DIR, filename);
   return new Promise((resolve) => {
     if (!fs.existsSync(fullPath)) {
       console.log(`(skipped) ${filename} — file not found`);
@@ -39,7 +40,7 @@ function runScript(filename) {
     }
 
     const child = spawn(process.execPath, [fullPath], {
-      cwd: __dirname,
+      cwd: ROOT,
       stdio: "inherit",
       env: { ...process.env, ...envFromDotEnv() },
     });
