@@ -36,6 +36,7 @@ router.get("/getAll", getAllLocal);
 router.get("/all-stores", async (req, res) => {
   try {
     const local = await Product.find().sort({ productId: 1 }).lean();
+    // Keep one response shape even when sources are different.
     const localNorm = local.map((p) => normalizeDoc(p, "local"));
     const remote = await loadRemoteStores(process.env);
 
@@ -43,6 +44,7 @@ router.get("/all-stores", async (req, res) => {
     res.json({
       count: all.length,
       products: all,
+      // Return remote fetch issues but still send available data.
       ...(remote.errors.length ? { fetchErrors: remote.errors } : {}),
     });
   } catch (err) {

@@ -10,6 +10,7 @@
   const tableLocal = document.getElementById("table-local");
   const tableAll = document.getElementById("table-all");
 
+  // Build table markup from product arrays returned by the API.
   function renderTable(container, rows, extraCols) {
     if (!rows.length) {
       container.innerHTML = "<p class=\"status\">No products.</p>";
@@ -59,6 +60,7 @@
     el.classList.toggle("error", !!isError);
   }
 
+  // Local store endpoint (assignment getAll).
   async function loadLocal() {
     setStatus(statusLocal, "Loading…", false);
     try {
@@ -100,6 +102,7 @@
     tabAll.setAttribute("aria-selected", !isLocal);
     panelLocal.hidden = !isLocal;
     panelAll.hidden = isLocal;
+    // Load combined data only when the tab is opened the first time.
     if (!isLocal && !panelAll.dataset.loaded) {
       panelAll.dataset.loaded = "1";
       loadAll();

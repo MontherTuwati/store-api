@@ -7,6 +7,7 @@ const PORT = process.env.PORT || 3000;
 function normalizeMongoUri(raw) {
   let s = String(raw ?? "").trim();
   if (
+    // Hosting dashboards sometimes wrap secret values in quotes.
     (s.startsWith('"') && s.endsWith('"')) ||
     (s.startsWith("'") && s.endsWith("'"))
   ) {

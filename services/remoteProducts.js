@@ -1,6 +1,7 @@
 //Fetches product arrays from team member APIs.
 
 function remoteTimeoutMs() {
+  // Allow override from env, otherwise use a safe default for hosted APIs.
   const n = Number(process.env.REMOTE_FETCH_TIMEOUT_MS);
   return Number.isFinite(n) && n > 0 ? n : 60000;
 }
@@ -33,6 +34,7 @@ async function fetchJson(url, label) {
     }
     return { ok: true, label, error: null, products: data };
   } catch (err) {
+    // Integration route stays resilient even if one remote store is down.
     return {
       ok: false,
       label,
@@ -43,6 +45,7 @@ async function fetchJson(url, label) {
 }
 
 function normalizeDoc(doc, source) {
+  // Keep output consistent no matter where the product came from.
   return {
     storeId: doc.storeId,
     storeName: doc.storeName,
@@ -54,6 +57,7 @@ function normalizeDoc(doc, source) {
 }
 
 async function loadRemoteStores(env) {
+  // Fetch each teammate feed independently so one failure does not block the other.
   const juan = await fetchJson(env.JUAN_PRODUCTS_URL, "juan");
   const maya = await fetchJson(env.MAYA_PRODUCTS_URL, "maya");
 

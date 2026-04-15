@@ -5,6 +5,7 @@ const path = require("path");
 const ROOT = path.join(__dirname, "..");
 const STANDALONE_DIR = path.join(ROOT, "tests", "standalone");
 
+// Run order matters for the assignment demo output.
 const TEST_FILES = ["test-getAll.js", "juan-test.js", "mayada-test.js"];
 
 function envFromDotEnv() {
@@ -19,6 +20,7 @@ function envFromDotEnv() {
     if (eq === -1) continue;
     const key = s.slice(0, eq).trim();
     let val = s.slice(eq + 1).trim();
+    // Allow quoted values in .env (ex: API_BASE_URL="https://...").
     if (
       (val.startsWith('"') && val.endsWith('"')) ||
       (val.startsWith("'") && val.endsWith("'"))
@@ -34,11 +36,13 @@ function runScript(filename) {
   const fullPath = path.join(STANDALONE_DIR, filename);
   return new Promise((resolve) => {
     if (!fs.existsSync(fullPath)) {
+      // Skip missing teammate files without failing the whole run.
       console.log(`(skipped) ${filename} — file not found`);
       resolve();
       return;
     }
 
+    // process.execPath points to the current Node binary.
     const child = spawn(process.execPath, [fullPath], {
       cwd: ROOT,
       stdio: "inherit",
@@ -51,6 +55,7 @@ function runScript(filename) {
     });
 
     child.on("close", () => {
+      // Always continue so one failure does not block remaining checks.
       resolve();
     });
   });
