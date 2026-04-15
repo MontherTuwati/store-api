@@ -5,7 +5,7 @@ const https = require("https");
 const { URL } = require("url");
 
 const TEST_NAME = "getAll to show all product";
-const email = process.env.STUDENT_EMAIL || "monthertuwati@gmail.com";
+const email = process.env.STUDENT_EMAIL || "tuwa0001@algonquinlive.com";
 const base = (process.env.API_BASE_URL || "http://127.0.0.1:3000").replace(/\/$/, "");
 const target = `${base}/getAll`;
 
